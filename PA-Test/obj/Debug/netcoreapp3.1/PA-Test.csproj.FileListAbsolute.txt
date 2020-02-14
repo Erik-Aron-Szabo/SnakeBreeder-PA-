@@ -1,0 +1,11 @@
+C:\CSharp\PA-Test\SnakeBreeder\PA-Test\obj\Debug\netcoreapp3.1\PA-Test.csprojAssemblyReference.cache
+C:\CSharp\PA-Test\SnakeBreeder\PA-Test\obj\Debug\netcoreapp3.1\PA-Test.AssemblyInfoInputs.cache
+C:\CSharp\PA-Test\SnakeBreeder\PA-Test\obj\Debug\netcoreapp3.1\PA-Test.AssemblyInfo.cs
+C:\CSharp\PA-Test\SnakeBreeder\PA-Test\bin\Debug\netcoreapp3.1\PA-Test.exe
+C:\CSharp\PA-Test\SnakeBreeder\PA-Test\bin\Debug\netcoreapp3.1\PA-Test.deps.json
+C:\CSharp\PA-Test\SnakeBreeder\PA-Test\bin\Debug\netcoreapp3.1\PA-Test.runtimeconfig.json
+C:\CSharp\PA-Test\SnakeBreeder\PA-Test\bin\Debug\netcoreapp3.1\PA-Test.runtimeconfig.dev.json
+C:\CSharp\PA-Test\SnakeBreeder\PA-Test\bin\Debug\netcoreapp3.1\PA-Test.dll
+C:\CSharp\PA-Test\SnakeBreeder\PA-Test\bin\Debug\netcoreapp3.1\PA-Test.pdb
+C:\CSharp\PA-Test\SnakeBreeder\PA-Test\obj\Debug\netcoreapp3.1\PA-Test.dll
+C:\CSharp\PA-Test\SnakeBreeder\PA-Test\obj\Debug\netcoreapp3.1\PA-Test.pdb

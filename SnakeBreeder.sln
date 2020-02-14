@@ -1,0 +1,82 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PA-Test", "PA-Test\PA-Test.csproj", "{03A21B7C-80EB-4EC2-8C18-E9EE0346D0EA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Snake", "Snake", "{23EB9F59-0C04-41C6-9359-041163FE1971}"
+	ProjectSection(SolutionItems) = preProject
+		PA-Test\Snake.cs = PA-Test\Snake.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Housing", "Housing", "{6DCBF4CA-1811-4E81-AC6C-0186A8FFBDD5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Terrarium", "Terrarium", "{4627C547-325D-4146-A3ED-E1265A480CFD}"
+	ProjectSection(SolutionItems) = preProject
+		PA-Test\LuxuryTerrarium.cs = PA-Test\LuxuryTerrarium.cs
+		PA-Test\NormalTerrarium.cs = PA-Test\NormalTerrarium.cs
+		PA-Test\SmallTerrarium.cs = PA-Test\SmallTerrarium.cs
+		PA-Test\Terrarium.cs = PA-Test\Terrarium.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Food", "Food", "{6E0C7EA4-F784-4C18-854D-64D54A7ED992}"
+	ProjectSection(SolutionItems) = preProject
+		PA-Test\Food.cs = PA-Test\Food.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Types", "Types", "{6AB5AE34-659E-4CFC-B63B-05F43DCD08A8}"
+	ProjectSection(SolutionItems) = preProject
+		PA-Test\Bird.cs = PA-Test\Bird.cs
+		PA-Test\Carrot.cs = PA-Test\Carrot.cs
+		PA-Test\Mouse.cs = PA-Test\Mouse.cs
+		PA-Test\Rat.cs = PA-Test\Rat.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{28DFE2BA-2A7F-429F-BAFA-5A6AB432E715}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1", "1", "{0C7B32CF-EA3A-4CA6-8F05-B1DF2F346039}"
+	ProjectSection(SolutionItems) = preProject
+		PA-Test\Menu.cs = PA-Test\Menu.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2", "2", "{37251D37-BAEB-4642-A64A-FFE222384FE5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Menu", "Menu", "{30A42E8A-F6FD-4300-B87E-3CA675E68E41}"
+	ProjectSection(SolutionItems) = preProject
+		PA-Test\Menu.cs = PA-Test\Menu.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SubMenus", "SubMenus", "{A42CEFA6-E7F7-448D-8A80-A068F49903A1}"
+	ProjectSection(SolutionItems) = preProject
+		PA-Test\FoodMenu.cs = PA-Test\FoodMenu.cs
+		PA-Test\SnakeMenu.cs = PA-Test\SnakeMenu.cs
+		PA-Test\TerrariumMenu.cs = PA-Test\TerrariumMenu.cs
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{03A21B7C-80EB-4EC2-8C18-E9EE0346D0EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03A21B7C-80EB-4EC2-8C18-E9EE0346D0EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03A21B7C-80EB-4EC2-8C18-E9EE0346D0EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03A21B7C-80EB-4EC2-8C18-E9EE0346D0EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4627C547-325D-4146-A3ED-E1265A480CFD} = {6DCBF4CA-1811-4E81-AC6C-0186A8FFBDD5}
+		{6E0C7EA4-F784-4C18-854D-64D54A7ED992} = {6DCBF4CA-1811-4E81-AC6C-0186A8FFBDD5}
+		{6AB5AE34-659E-4CFC-B63B-05F43DCD08A8} = {6E0C7EA4-F784-4C18-854D-64D54A7ED992}
+		{0C7B32CF-EA3A-4CA6-8F05-B1DF2F346039} = {28DFE2BA-2A7F-429F-BAFA-5A6AB432E715}
+		{37251D37-BAEB-4642-A64A-FFE222384FE5} = {28DFE2BA-2A7F-429F-BAFA-5A6AB432E715}
+		{A42CEFA6-E7F7-448D-8A80-A068F49903A1} = {30A42E8A-F6FD-4300-B87E-3CA675E68E41}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {90875048-8E0A-4C8D-8074-0739B17BCADE}
+	EndGlobalSection
+EndGlobal
