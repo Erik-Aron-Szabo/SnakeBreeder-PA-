@@ -37,7 +37,7 @@ namespace PA_Test
                 }
                 else if (choice == "exit")
                 {
-                    // exit program
+                    System.Environment.Exit(1);
                 }
                 else if (choice == "back")
                 {

@@ -7,14 +7,12 @@ namespace PA_Test
     public class Snake
     {
         public string Name { get; set; }
-        public int Hunger { get; set; } // if hunger hits 100, snake dies
-        public int Happiness { get; set; }
+        public string Type { get; set; } // water, sand, mountain
 
-        public Snake(string name, int hunger, int happiness)
+        public Snake(string name, string type)
         {
             Name = name;
-            Hunger = hunger;
-            Happiness = happiness;
+            Type = type;
         }
         public Snake()
         {

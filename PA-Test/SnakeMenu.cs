@@ -7,8 +7,15 @@ namespace PA_Test
 {
     public class SnakeMenu : Menu
     {
+        XML theXml = new XML();
         List<Snake> snakeList = new List<Snake>();
-
+        public List<Snake> ProgramToClass(List<Snake> snakes)
+        {
+            List<Snake> snakeList;
+            snakeList = snakes;
+            return snakeList;
+        }
+        
         //this is where ALL the snakes are
         public void DisplaySnakeMenu()
         {
@@ -21,22 +28,26 @@ namespace PA_Test
             Console.WriteLine("(5) Exit");
         }
 
+        public Snake CreateSnake()
+        {
+            Console.WriteLine("Name: ");
+            string uiName = Console.ReadLine();
+            Console.WriteLine("Type: ");
+            string uiType = Console.ReadLine();
+            Snake Hul = new Snake(uiName, uiType);
+            theXml.Writer(uiName, uiType);
+            return Hul;
+            
+        }
+
         public void SnakeSwitch(string choice)
         {
-
             //maybe a WHILE here?
             try
             {
                 if (choice == "create")
                 {
-
-
-                    Console.WriteLine("Name: ");
-                    string uiName = Console.ReadLine();
-                    int h = 0;
-                    int ha = 100;
-                    Snake Hul = new Snake(uiName, h, ha);
-                    SnakeToList(Hul);
+                    AddSnakeToList(CreateSnake());
                     Console.WriteLine("Done!");
                 }
                 else if (choice == "destroy")
@@ -59,7 +70,7 @@ namespace PA_Test
                 }
                 else if (choice == "exit")
                 {
-                    // Exit the program
+                    System.Environment.Exit(1);
                 }
                 else if (choice == "back")
                 {
@@ -74,12 +85,8 @@ namespace PA_Test
             
         }
 
-        public SnakeMenu()
-        {
 
-        }
-
-        public void SnakeToList(Snake snake)
+        public void AddSnakeToList(Snake snake)
         {
             snakeList.Add(snake);
         }
@@ -132,6 +139,17 @@ namespace PA_Test
                 Console.WriteLine($"Happiness: {item.Happiness}");
             }
         }
+
+        public List<Snake> SnakeListToPublic()
+        {
+            return this.snakeList;
+        }
+
+        public List<Snake> IncomingSnakeListToClass(List<Snake> incomingSnakeList)
+        {
+            return incomingSnakeList;
+        }
+        
 
     }
 }

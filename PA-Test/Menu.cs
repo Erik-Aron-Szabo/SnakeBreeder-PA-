@@ -29,7 +29,12 @@ namespace PA_Test
             return input;
         }
 
-       
+        public List<Snake> CreateSnakeList()
+        {
+            List<Snake> snakeList2 = new List<Snake>();
+            return snakeList2;
+        }
+
 
         //delegate void snakecommand();
         // commands[choice]();
@@ -63,7 +68,7 @@ namespace PA_Test
                 }
                 else if (choice == "exit")
                 {
-                    //
+                    System.Environment.Exit(1);
                 }
             }
             catch (Exception)
