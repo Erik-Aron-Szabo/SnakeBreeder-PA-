@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
 <ArrayOfSnake xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Snake Name="Erik" Type="Water" />
+  <Snake Name="Erik2" Type="Water" />
 </ArrayOfSnake>

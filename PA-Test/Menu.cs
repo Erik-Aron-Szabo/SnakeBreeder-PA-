@@ -53,7 +53,7 @@ namespace PA_Test
 
                     snakeMenu.DisplaySnakeMenu();
                     string ui = Console.ReadLine();
-                    theXml.WriteToXmlFile(snakeMenu.SnakeSwitch(ui, snakeList, filename));
+                    theXml.WriteToXmlFile(snakeMenu.SnakeSwitch(ui, snakeList, filename), filename);
                     return true;
                 }
                 else if (choice == "terrarium")

@@ -6,7 +6,7 @@ namespace PA_Test
 {
     public class NormalTerrarium : Terrarium
     {
-        public override void AddSnake()
+        public override void AddSnake(Snake snake)
         {
             throw new NotImplementedException();
         }

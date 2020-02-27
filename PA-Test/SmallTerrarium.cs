@@ -8,7 +8,7 @@ namespace PA_Test
     {
 
 
-        public override void AddSnake()
+        public override void AddSnake(Snake snake)
         {
             throw new NotImplementedException();
         }
