@@ -9,7 +9,7 @@ namespace PA_Test
 {
     public class XML
     {
-        public void WriteToXmlFile(List<Snake> snakes, string filename)
+        public void SnakeWriteToXmlFile(List<Snake> snakes, string filename)
         {
             System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof(List<Snake>));
 
@@ -26,7 +26,7 @@ namespace PA_Test
 
         }
 
-        public List<Snake> LoadObjectFromXmlFile(string filename)
+        public List<Snake> SnakeLoadObjectFromXmlFile(string filename)
         {
             List<Snake> returnObject = null;
 
@@ -44,6 +44,7 @@ namespace PA_Test
             return returnObject;
         }
 
+        //Water terrarium, Land Terrarium ( 2 is enough)
         public XML()
         {
 

@@ -19,7 +19,7 @@ namespace PA_Test
             XML theXml = new XML();
             //string path = @"C:\CSharp\PA-Test\SnakeBreeder2\SnakeBreeder-PA-\PA-Test\AllSnakes.xml"; // maybe let user type it?
             string filename = "JustSnakes.xml";
-            List<Snake> snakeList = theXml.LoadObjectFromXmlFile(filename); // All snakes
+            List<Snake> snakeList = theXml.SnakeLoadObjectFromXmlFile(filename); // All snakes
             //for (int i = 0; i < 3; i++)
             //{
             //    Snake a = new Snake();
