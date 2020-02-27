@@ -11,7 +11,7 @@ namespace PA_Test
         public int Temperature { get; set; }
         public string Theme { get; set; }
 
-        public abstract void AddSnake();
+        public abstract void AddSnake(Snake snake); //abba a tipusu terrariumba bele lehet e rakni a snake-t (Type alapjan)
 
         public abstract void DisplayContents();
 

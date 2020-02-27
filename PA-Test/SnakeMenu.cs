@@ -7,8 +7,7 @@ namespace PA_Test
 {
     public class SnakeMenu : Menu
     {
-        XML theXml = new XML();
-        List<Snake> snakeList = new List<Snake>();
+
         public List<Snake> ProgramToClass(List<Snake> snakes)
         {
             List<Snake> snakeList;
@@ -16,7 +15,6 @@ namespace PA_Test
             return snakeList;
         }
         
-        //this is where ALL the snakes are
         public void DisplaySnakeMenu()
         {
             Console.WriteLine("Snake Menu");
@@ -28,33 +26,24 @@ namespace PA_Test
             Console.WriteLine("(5) Exit");
         }
 
-        public Snake CreateSnake()
+        public List<Snake> SnakeSwitch(string choice, List<Snake> snakeList, string filename)
         {
-            Console.WriteLine("Name: ");
-            string uiName = Console.ReadLine();
-            Console.WriteLine("Type: ");
-            string uiType = Console.ReadLine();
-            Snake Hul = new Snake(uiName, uiType);
-            theXml.Writer(uiName, uiType);
-            return Hul;
-            
-        }
 
-        public void SnakeSwitch(string choice)
-        {
             //maybe a WHILE here?
             try
             {
                 if (choice == "create")
                 {
-                    AddSnakeToList(CreateSnake());
+                    AddSnakeToList(CreateSnake(snakeList), snakeList);
                     Console.WriteLine("Done!");
                 }
                 else if (choice == "destroy")
                 {
                     Console.WriteLine("Name: ");
                     string uiName = Console.ReadLine();
-                    DeleteSnake(uiName, snakeList);
+                    Console.WriteLine("Type: ");
+                    string uiType = Console.ReadLine();
+                    theXml.WriteToXmlFile(DeleteSnake(uiName, uiType, snakeList), filename);
                     Console.WriteLine("Done!");
                 }
                 else if (choice == "update")
@@ -82,24 +71,70 @@ namespace PA_Test
 
                 Console.WriteLine("Type with lowercase maybe.");
             }
-            
+
+            return snakeList;
         }
 
 
-        public void AddSnakeToList(Snake snake)
+        public void AddSnakeToList(Snake snake, List<Snake> snakeList)
         {
             snakeList.Add(snake);
         }
 
-        public void DeleteSnake(string name, List<Snake> tempSnakeList)
+        public Snake CreateSnake(List<Snake> snakeList) //XML writes it also
+        {
+            Snake Hul = new Snake(); //HashSet instead of list?
+            Console.WriteLine("Name: ");
+            string uiName = Console.ReadLine();
+            Console.WriteLine("Type: ");
+            string uiType = Console.ReadLine();
+            Hul.Name = uiName;
+            Hul.Type = uiType;
+            return Hul;
+
+        }
+        public List<Snake> DeleteSnake(string name, string type, List<Snake> snakeList)
+        {
+            // if snake's name are the same, it will delete both snakes.
+            try
+            {
+                int counter = 0;
+                foreach (var snake in snakeList.ToList())
+                {
+                    if (name == snake.Name && type == snake.Type)
+                    {
+                        if (counter >= 1)
+                        {
+                            Console.WriteLine("There are more than 1 snakes with the same name and type!\nBoth will be deleted!"); //maybe the User can decide if he wants to delete all snakes?
+                        }
+                        snakeList.Remove(snake);
+                        counter++;
+                    }
+                }
+            }
+            catch (Exception ok)
+            {
+                Console.WriteLine(ok);
+                Console.WriteLine("Check given name!");
+            }
+            return snakeList;
+        }
+
+        public void UpdateSnake(string name, List<Snake> snakeList)
         {
             try
             {
-                foreach (var item in tempSnakeList)
+                foreach (var snake in snakeList)
                 {
-                    if (name == item.Name)
+                    if (name == snake.Name)
                     {
-                        tempSnakeList.Remove(item);
+                        Console.WriteLine("New Name: ");
+                        string newName = Console.ReadLine();
+                        Console.WriteLine("New Type: ");
+                        string newType = Console.ReadLine();
+                        snake.Name = newName;
+                        snake.Type = newType;
+                        Console.WriteLine("Update successful!");
                     }
                 }
             }
@@ -110,46 +145,13 @@ namespace PA_Test
             }
         }
 
-        public void UpdateSnake(string newName, List<Snake> tempSnakeList)
+        public void DisplayAllSnakes(List<Snake> snakeList)
         {
-            try
-            {
-                foreach (var item in tempSnakeList)
-                {
-                    if (newName == item.Name)
-                    {
-                        item.Name = newName;
-                    }
-                }
-            }
-            catch (Exception)
-            {
-
-                Console.WriteLine("Check given name!");
-            }
-        }
-
-        public void DisplayAllSnakes(List<Snake> tempSnakeList)
-        {
-            foreach (Snake item in tempSnakeList)
+            foreach (Snake item in snakeList)
             {
                 Console.WriteLine(item);
                 Console.WriteLine($"Name: {item.Name}");
-                Console.WriteLine($"Hunger: {item.Hunger}");
-                Console.WriteLine($"Happiness: {item.Happiness}");
             }
         }
-
-        public List<Snake> SnakeListToPublic()
-        {
-            return this.snakeList;
-        }
-
-        public List<Snake> IncomingSnakeListToClass(List<Snake> incomingSnakeList)
-        {
-            return incomingSnakeList;
-        }
-        
-
     }
 }

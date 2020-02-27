@@ -6,7 +6,7 @@ namespace PA_Test
 {
     public class Menu
     {
-        
+        public XML theXml = new XML();
 
 
         public void DisplayMainMenu()
@@ -41,7 +41,7 @@ namespace PA_Test
 
         //dictionary<string, snakecommand> commands = new dictionary<string, snakecommand>();
 
-        public void Switch(string choice)
+        public bool Switch(string choice, List<Snake> snakeList, string filename)
         {
             SnakeMenu snakeMenu = new SnakeMenu();
             FoodMenu foodMenu = new FoodMenu();
@@ -50,25 +50,32 @@ namespace PA_Test
             {
                 if (choice == "snake")
                 {
+
                     snakeMenu.DisplaySnakeMenu();
                     string ui = Console.ReadLine();
-                    snakeMenu.SnakeSwitch(ui);
+                    theXml.WriteToXmlFile(snakeMenu.SnakeSwitch(ui, snakeList, filename));
+                    return true;
                 }
                 else if (choice == "terrarium")
                 {
                     terrariumMenu.DisplayTerrariumMenu();
                     string ui = Console.ReadLine();
                     terrariumMenu.TerrariumSwitch(ui);
+                    return true;
+
                 }
                 else if (choice == "food")
                 {
                     foodMenu.DisplayFoodMenu();
                     string ui = Console.ReadLine();
                     foodMenu.FoodSwitch(ui);
+                    return true;
+
                 }
                 else if (choice == "exit")
                 {
-                    System.Environment.Exit(1);
+
+                    return false;
                 }
             }
             catch (Exception)
@@ -76,7 +83,8 @@ namespace PA_Test
 
                 Console.WriteLine("Invlaid input!(3)");
             }
-                
+                    return true;
+
 
         }
 

@@ -18,12 +18,11 @@ namespace PA_Test
             throw new NotImplementedException();
         }
 
-        public SmallTerrarium(int id, int capacity, int temperature, int humidity)
+        public SmallTerrarium(int id, int capacity, int temperature)
         {
             ID = id;
             Capacity = capacity;
             Temperature = temperature;
-            Humidity = humidity;
         }
 
     }

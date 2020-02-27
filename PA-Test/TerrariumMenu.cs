@@ -48,10 +48,8 @@ namespace PA_Test
                             Console.WriteLine("Temperature of Terrarium: ");
                             int uiTemperature = Convert.ToInt32(Console.ReadLine());
 
-                            Console.WriteLine("Humidity of Terrarium: ");
-                            int uiHumidity = Convert.ToInt32(Console.ReadLine());
 
-                            smallTer = new SmallTerrarium(uiID, uiGallon, uiTemperature, uiHumidity);
+                            smallTer = new SmallTerrarium(uiID, uiGallon, uiTemperature);
                         }
                         else if (choice == "normal")
                         {
@@ -64,10 +62,8 @@ namespace PA_Test
                             Console.WriteLine("Temperature of Terrarium: ");
                             int uiTemperature = Convert.ToInt32(Console.ReadLine());
 
-                            Console.WriteLine("Humidity of Terrarium: ");
-                            int uiHumidity = Convert.ToInt32(Console.ReadLine());
 
-                            normalTer = new NormalTerrarium(uiID, uiGallon, uiTemperature, uiHumidity);
+                            normalTer = new NormalTerrarium(uiID, uiGallon, uiTemperature);
                         }
                         else if (choice == "luxury")
                         {
@@ -80,10 +76,8 @@ namespace PA_Test
                             Console.WriteLine("Temperature of Terrarium: ");
                             int uiTemperature = Convert.ToInt32(Console.ReadLine());
 
-                            Console.WriteLine("Humidity of Terrarium: ");
-                            int uiHumidity = Convert.ToInt32(Console.ReadLine());
 
-                            LuxuryTer = new LuxuryTerrarium(uiID, uiGallon, uiTemperature, uiHumidity);
+                            LuxuryTer = new LuxuryTerrarium(uiID, uiGallon, uiTemperature);
                         }
                     }
                     catch (Exception)

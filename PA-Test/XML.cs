@@ -1,42 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml;
-using System.Linq;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Xml.Serialization;
 
 namespace PA_Test
 {
     public class XML
     {
-        // reader
-        public void Writer(string name, string type)
+        public void WriteToXmlFile(List<Snake> snakes, string filename)
         {
-            XmlWriter xmlWriter = XmlWriter.Create("AllSnakes.xml");
-            xmlWriter.WriteStartDocument();
+            System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof(List<Snake>));
 
-            xmlWriter.WriteStartElement("Snakes");
-            xmlWriter.WriteStartElement("snake");
-            xmlWriter.WriteAttributeString("name", name);
-            xmlWriter.WriteAttributeString("type", type);
+            try
+            {
+                FileStream file = new FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.Write); 
+                writer.Serialize(file, snakes);
+                file.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine((ex.ToString() + " " + filename));
+            }
 
         }
 
-        public void SnakeWriter(string name, string type)
+        public List<Snake> LoadObjectFromXmlFile(string filename)
         {
-            XmlWriter xmlWriter = XmlWriter.Create("AllSnakes.xml");
-            xmlWriter.WriteStartDocument();
+            List<Snake> returnObject = null;
 
-            xmlWriter.WriteStartElement("Snakes");
-            xmlWriter.WriteStartElement("snake");
-            xmlWriter.WriteAttributeString("name", name);
-            xmlWriter.WriteAttributeString("type", type);
-
+            try
+            {
+                var xmlStream = new StreamReader(filename);
+                var serializer = new XmlSerializer(typeof(List<Snake>));
+                returnObject = (List<Snake>)serializer.Deserialize(xmlStream);
+                xmlStream.Close();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine($"Error loading {filename}");
+            }
+            return returnObject;
         }
 
         public XML()
         {
 
         }
-
     }
 }

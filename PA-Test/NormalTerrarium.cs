@@ -16,12 +16,11 @@ namespace PA_Test
             throw new NotImplementedException();
         }
 
-        public NormalTerrarium(int id, int capacity, int temperature, int humidity)
+        public NormalTerrarium(int id, int capacity, int temperature)
         {
             ID = id;
             Capacity = capacity;
             Temperature = temperature;
-            Humidity = humidity;
         }
     }
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\CSharp\\PA-Test\\SnakeBreeder\\PA-Test\\PA-Test.csproj": {}
+    "C:\\CSharp\\PA-Test\\SnakeBreeder2\\SnakeBreeder-PA-\\PA-Test\\PA-Test.csproj": {}
   },
   "projects": {
-    "C:\\CSharp\\PA-Test\\SnakeBreeder\\PA-Test\\PA-Test.csproj": {
+    "C:\\CSharp\\PA-Test\\SnakeBreeder2\\SnakeBreeder-PA-\\PA-Test\\PA-Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\CSharp\\PA-Test\\SnakeBreeder\\PA-Test\\PA-Test.csproj",
+        "projectUniqueName": "C:\\CSharp\\PA-Test\\SnakeBreeder2\\SnakeBreeder-PA-\\PA-Test\\PA-Test.csproj",
         "projectName": "PA-Test",
-        "projectPath": "C:\\CSharp\\PA-Test\\SnakeBreeder\\PA-Test\\PA-Test.csproj",
+        "projectPath": "C:\\CSharp\\PA-Test\\SnakeBreeder2\\SnakeBreeder-PA-\\PA-Test\\PA-Test.csproj",
         "packagesPath": "C:\\Users\\erika\\.nuget\\packages\\",
-        "outputPath": "C:\\CSharp\\PA-Test\\SnakeBreeder\\PA-Test\\obj\\",
+        "outputPath": "C:\\CSharp\\PA-Test\\SnakeBreeder2\\SnakeBreeder-PA-\\PA-Test\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\erika\\AppData\\Roaming\\NuGet\\NuGet.Config",

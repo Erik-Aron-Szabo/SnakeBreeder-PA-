@@ -6,4 +6,10 @@
     <RootNamespace>PA_Test</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Update="JustSnakes.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
