@@ -10,45 +10,60 @@ namespace PA_Test
         
         public static void Main(string[] args)
         {
-            if (!File.Exists("JustSnakes.xml"))
-            {
-                //File.Create("JustSnakes.xml");
-                File.WriteAllText("JustSnakes.xml", "<ArrayOfSnake></ArrayOfSnake>");
 
-            }
             XML theXml = new XML();
-            //string path = @"C:\CSharp\PA-Test\SnakeBreeder2\SnakeBreeder-PA-\PA-Test\AllSnakes.xml"; // maybe let user type it?
-            string filename = "JustSnakes.xml";
-            List<Snake> snakeList = theXml.SnakeLoadObjectFromXmlFile(filename); // All snakes
-            //for (int i = 0; i < 3; i++)
-            //{
-            //    Snake a = new Snake();
-            //    Console.WriteLine("N");
-            //    string n = Console.ReadLine();
-            //    Console.WriteLine("t");
-            //    string t = Console.ReadLine();
-            //    a.Name = n;
-            //    a.Type = t;
-            //    snakeList.Add(a);
-            //}
+            Utility util = new Utility();
+            SnakeMenu snakeMenu = new SnakeMenu();
+
+            List<Snake> snakeList = new List<Snake>();
+            List<WaterTerrarium> waTerList = new List<WaterTerrarium>();
+            List<LandTerrarium> lanTerList = new List<LandTerrarium>();
+            LandTerrarium laTer;
+            WaterTerrarium waTer;
+
+            string terFilename = "LandTerrarium.xml";
+            string waterFilename = "WaterTerrarium.xml";
+            string snakeFilename = "JustSnakes.xml";
+            
+
+            if (!File.Exists("LandTerrarium.xml") || theXml.IsEmpty(terFilename))
+            {
+                laTer = new LandTerrarium(util.IdGenerator(), snakeList);
+                lanTerList.Add(laTer);
+                theXml.LandTerWriteToXmlFile(lanTerList, terFilename);
+            }
+
+            if (!File.Exists("JustSnakes.xml") || theXml.IsEmpty(snakeFilename))
+            {
+                Console.WriteLine("Please create a Snake first!"); //snake already exists
+
+                snakeMenu.CreateSnake(snakeList);
+            }
+
+            if (!File.Exists("WaterTerrarium.xml") || theXml.IsEmpty(waterFilename))
+            {
+                waTer = new WaterTerrarium(util.IdGenerator(), snakeList);
+                waTerList.Add(waTer);
+                theXml.WaterTerWriteToXmlFile(waTerList, waterFilename);
+            }
+
+            snakeList = theXml.LoadObjectFromXmlFile(snakeFilename);
+            waTerList = theXml.WaterTerLoadObjectFromXmlFile(waterFilename);
+            lanTerList = theXml.LandTerLoadObjectFromXmlFile(terFilename);
+
+            
+
+            theXml.WriteToXmlFile(snakeList, snakeFilename);
+
             Menu mainMenu = new Menu();
             do
             {
                 mainMenu.DisplayMainMenu();
                 string choice = mainMenu.InputHandler("Type option with lowercase: ");
-                if (!mainMenu.Switch(choice, snakeList, filename))
+                if (!mainMenu.Switch(choice, snakeList, lanTerList, waTerList, snakeFilename, terFilename, waterFilename))
                     break;
-                
+
             } while (true);
-            //foreach (var snake in snakeList)
-            //{
-            //    Console.WriteLine(snake.Name);
-            //    Console.WriteLine(snake.Type);
-            //}
-            //theXml.WriteToXmlFile(snakeList, filename);
-            Console.WriteLine("Done");
-
-
         }
     }
 }

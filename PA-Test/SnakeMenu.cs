@@ -20,59 +20,76 @@ namespace PA_Test
             Console.WriteLine("Snake Menu");
             Console.WriteLine("(1) Create (creates and adds snake to List)");
             Console.WriteLine("(2) Destroy (takes snake out of the List)");
-            Console.WriteLine("(3) Update (update snake's name)");
+            Console.WriteLine("(3) Update (update snake)");
             Console.WriteLine("(4) Display (all snakes)");
-            Console.WriteLine("(4) Back");
-            Console.WriteLine("(5) Exit");
+            Console.WriteLine("(7) Back");
+            Console.WriteLine("(8) Exit");
         }
 
-        public List<Snake> SnakeSwitch(string choice, List<Snake> snakeList, string filename)
+        public List<Snake> SnakeSwitch(string choice, List<Snake> snakeList, List<WaterTerrarium> waTerList, List<LandTerrarium> lanTerList, string filename)
         {
+            while (true)
+            {
+                try
+                {
+                    if (choice == "create")
+                    {
+                        AddSnakeToList(CreateSnake(snakeList), snakeList); //check, 2 snakes can NOT have the same name
+                        Console.WriteLine("Done!");
+                    }
+                    else if (choice == "destroy")
+                    {
+                        Console.WriteLine("Name: ");
+                        string uiName = Console.ReadLine();
+                        Console.WriteLine("Type: ");
+                        string uiType = Console.ReadLine();
+                        theXml.WriteToXmlFile(DeleteSnake(uiName, uiType, snakeList), filename);
+                        Console.WriteLine("Done!");
+                    }
+                    else if (choice == "update")
+                    {
+                        Console.WriteLine("Name of the snake you want to update: ");
+                        string uiName = Console.ReadLine();
+                        UpdateSnake(uiName, snakeList);
+                        Console.WriteLine("Done!");
+                    }
+                    else if (choice == "display")
+                    {
+                        DisplayAllSnakes(snakeList);
+                    }
+                    else if (choice == "exit")
+                    {
+                        System.Environment.Exit(1);
+                    }
+                    else if (choice == "back")
+                    {
+                        break;
+                        // go back to MainMenu
+                    }
+                }
+                catch (Exception)
+                {
 
+                    Console.WriteLine("Type with lowercase maybe.");
+                }
+            }
             //maybe a WHILE here?
-            try
-            {
-                if (choice == "create")
-                {
-                    AddSnakeToList(CreateSnake(snakeList), snakeList);
-                    Console.WriteLine("Done!");
-                }
-                else if (choice == "destroy")
-                {
-                    Console.WriteLine("Name: ");
-                    string uiName = Console.ReadLine();
-                    Console.WriteLine("Type: ");
-                    string uiType = Console.ReadLine();
-                    theXml.WriteToXmlFile(DeleteSnake(uiName, uiType, snakeList), filename);
-                    Console.WriteLine("Done!");
-                }
-                else if (choice == "update")
-                {
-                    Console.WriteLine("Name of the snake you want to update: ");
-                    string uiName = Console.ReadLine();
-                    UpdateSnake(uiName, snakeList);
-                    Console.WriteLine("Done!");
-                }
-                else if (choice == "display")
-                {
-                    DisplayAllSnakes(snakeList);
-                }
-                else if (choice == "exit")
-                {
-                    System.Environment.Exit(1);
-                }
-                else if (choice == "back")
-                {
-                    // go back to MainMenu
-                }
-            }
-            catch (Exception)
-            {
-
-                Console.WriteLine("Type with lowercase maybe.");
-            }
+           
 
             return snakeList;
+        }
+
+        public void DuplicateChecker(List<Snake> snakeList, string name)
+        {
+            foreach (var snake in snakeList)
+            {
+                if (snake.Name == name)
+                {
+                    snakeList.Remove(snake);
+                    Console.WriteLine("Snake duplicate found!");
+                    Console.WriteLine("One of the snake out of the duplicates are deleted.");
+                }
+            }
         }
 
 
@@ -83,15 +100,29 @@ namespace PA_Test
 
         public Snake CreateSnake(List<Snake> snakeList) //XML writes it also
         {
+
             Snake Hul = new Snake(); //HashSet instead of list?
             Console.WriteLine("Name: ");
             string uiName = Console.ReadLine();
+            AlreadyExistChecker(snakeList, uiName); //Snake name can not be the same
             Console.WriteLine("Type: ");
             string uiType = Console.ReadLine();
             Hul.Name = uiName;
             Hul.Type = uiType;
             return Hul;
+        }
 
+        public bool AlreadyExistChecker(List<Snake> snakeList, string name)
+        {
+            foreach (var snake in snakeList)
+            {
+                if (snake.Name.ToLower() == name.ToLower())
+                {
+                    Console.WriteLine("Snake already exists with given name!\nTry again!");
+                    return true;
+                }
+            }
+            return false;
         }
         public List<Snake> DeleteSnake(string name, string type, List<Snake> snakeList)
         {
