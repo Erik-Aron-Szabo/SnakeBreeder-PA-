@@ -15,7 +15,6 @@ namespace PA_Test
             Console.WriteLine("(1) Water Terrarium Menu");
             Console.WriteLine("(2) Land Terrarium Menu");
             Console.WriteLine("(3) Snakes Menu");
-            Console.WriteLine("(4) Food Menu");
             Console.WriteLine("() Back");
             Console.WriteLine("() Exit");
         }
@@ -43,7 +42,7 @@ namespace PA_Test
             LaTerrariumMenu laTerrariumMenu = new LaTerrariumMenu();
             try
             {
-                if (choice == "snake")
+                if (choice == "snake" || choice == "3")
                 {
 
                     snakeMenu.DisplaySnakeMenu();
@@ -51,30 +50,23 @@ namespace PA_Test
                     theXml.WriteToXmlFile(snakeMenu.SnakeSwitch(ui, snakeList,  waTerList, lanTerList, snakeFilename), snakeFilename);
                     return true;
                 }
-                else if (choice == "2")
+                else if (choice == "2") //LAND
                 {
                     laTerrariumMenu.LaTerrariumMenuDisplay();
                     string ui = Console.ReadLine();
-                    theXml.LandTerWriteToXmlFile(laTerrariumMenu.LaTerrariumSwitch(ui, snakeList, snakeFilename, waTerList, waterFilename ,lanTerList, terFilename), terFilename);
+                    theXml.LandTerWriteToXmlFile(laTerrariumMenu.LaTerrariumSwitch(ui, snakeList, snakeFilename,lanTerList, terFilename), terFilename);
                     return true;
 
                 }
-                else if (choice == "1")
+                else if (choice == "1") //WATER
                 {
                     waTerrariumMenu.WaTerrariumMenuDisplay();
                     string ui = Console.ReadLine();
-                    theXml.WaterTerWriteToXmlFile(waTerrariumMenu.WaTerrariumSwitch(ui, snakeList, snakeFilename, waTerList, waterFilename, lanTerList, terFilename), terFilename);
+                    theXml.WaterTerWriteToXmlFile(waTerrariumMenu.WaTerrariumSwitch(ui, snakeList, snakeFilename, waTerList, waterFilename), waterFilename);
                     return true;
 
                 }
-                else if (choice == "food")
-                {
-                    foodMenu.DisplayFoodMenu();
-                    string ui = Console.ReadLine();
-                    foodMenu.FoodSwitch(ui);
-                    return true;
-
-                }
+                
                 else if (choice == "exit")
                 {
 

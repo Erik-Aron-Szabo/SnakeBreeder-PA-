@@ -5,4 +5,6 @@
   <Snake Name="Erik" Type="Water" />
   <Snake Name="Robi" Type="Land" />
   <Snake Name="Pipo" Type="Water" />
+  <Snake Name="Hugo" Type="Land" />
+  <Snake Name="Ketto" Type="Water" />
 </ArrayOfSnake>

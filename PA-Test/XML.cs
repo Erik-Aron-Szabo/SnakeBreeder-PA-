@@ -77,7 +77,7 @@ namespace PA_Test
             }
             catch (Exception)
             {
-                Console.WriteLine($"Error loading {filename}");
+                Console.WriteLine($"Error loading water {filename}");
             }
             return returnObject;
         }
@@ -89,20 +89,21 @@ namespace PA_Test
 
             try
             {
-                FileStream file = new FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.Write);//PROBLEM
+                FileStream file = new FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.Write);//PROBLEM 
                 writer.Serialize(file, landTer);
                 file.Close();
             }
             catch (Exception ex)
             {
                 Console.WriteLine((ex.ToString() + " " + filename));
+                Console.WriteLine("LandTerrariumXML");
             }
-            
+
         }
 
 
 
-        public List<LandTerrarium> LandTerLoadObjectFromXmlFile(string filename)
+        public List<LandTerrarium> LandTerLoadObjectFromXmlFile(string filename)// sometimes, it changes it to "waterTerrarium" PROBLEM
         {
             //land terrarium
             List<LandTerrarium> returnObject = null;
@@ -116,12 +117,18 @@ namespace PA_Test
             }
             catch (Exception)
             {
-                Console.WriteLine($"Error loading {filename}");
+                Console.WriteLine($"Error loading LAND {filename}");
             }
             return returnObject;
         }
 
-        //Water terrarium, Land Terrarium ( 2 is enough)
+        public void LandToWaterChecker()
+        {
+
+        }
+
+       
+
         public XML()
         {
 
@@ -142,9 +149,6 @@ namespace PA_Test
                         return false;
                     }
                 }
-
-                
-
             }
             catch (Exception)
             {

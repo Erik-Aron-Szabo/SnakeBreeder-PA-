@@ -14,16 +14,15 @@ namespace PA_Test
             Console.WriteLine("Land Terrarium Menu");
             Console.WriteLine("(1) Create (Terarium and adds it to the List)");
             Console.WriteLine("(2) Destroy (Terrarium)");
-            Console.WriteLine("(3) Snakes Menu");
-            Console.WriteLine("(4) Update");
-            Console.WriteLine("(5) Display");
-            Console.WriteLine("(6) Add snake to terrarium");
+            
+            Console.WriteLine("(4) Display");
+            Console.WriteLine("(5) back");
             Console.WriteLine("() Exit");
         }
 
         
 
-        public List<LandTerrarium> LaTerrariumSwitch(string choice, List<Snake> snakeList, string snakeFilename, List<WaterTerrarium> waTerList, string waterFilename, List<LandTerrarium> lanTerList, string lanTerfilename)
+        public List<LandTerrarium> LaTerrariumSwitch(string choice, List<Snake> snakeList, string snakeFilename, List<LandTerrarium> lanTerList, string lanTerfilename)
         {
             SnakeMenu snakeMenu = new SnakeMenu();
             XML theXml = new XML();
@@ -32,40 +31,31 @@ namespace PA_Test
             {
                 try
                 {
-                    if (choice == "create")
+                    if (choice == "create" || choice == "1")
                     {
                         AddTerToList(CreateLaTerrarium(lanTerList), lanTerList);
                         Console.WriteLine("Done");
+                        break;
                     }
-                    else if (choice == "destroy")
+                    else if (choice == "destroy" || choice == "2")
                     {
-                        Console.WriteLine("Name: ");
-                        string uiName = Console.ReadLine();
-                        Console.WriteLine("Type: ");
-                        string uiType = Console.ReadLine();
-                        //theXml.WriteToXmlFile(DeleteSnake(uiName, uiType, snakeList), filename);
-                        Console.WriteLine("Done!");
+                        Console.WriteLine("ID: ");
+                        string id = Console.ReadLine();
+                        DestroyTerrarium(lanTerList, id);
+                        break;
                     }
 
-                    else if (choice == "display")
+                    else if (choice == "display" || choice == "4")
                     {
                         DisplayTerrarium(lanTerList);
+                        break;
                     }
-                    else if (choice == "3") //Snake Menu
-                    {
-                        snakeMenu.DisplaySnakeMenu();
-                        string ui = Console.ReadLine();
-                        theXml.WriteToXmlFile(snakeMenu.SnakeSwitch(ui, snakeList, waTerList, lanTerList, snakeFilename), snakeFilename);
-                    }
-                    else if (choice == "6")
-                    {
-
-                    }
+                    
                     else if (choice == "exit")
                     {
                         System.Environment.Exit(1);
                     }
-                    else if (choice == "back")
+                    else if (choice == "back" || choice == "5")
                     {
                         break;
                         // go back to MainMenu
@@ -75,11 +65,30 @@ namespace PA_Test
                 {
 
                     Console.WriteLine("Invalid input!");
+                    break;
                 }
             }
 
             return lanTerList;
         }
+
+        public void DestroyTerrarium(List<LandTerrarium> lanTerList, string id)
+        {
+            try
+            {
+                foreach (var ter in lanTerList)
+                {
+                    if (ter.ID == id)
+                    {
+                        lanTerList.Remove(ter);
+                    }
+                }
+            }
+            catch (System.InvalidOperationException)
+            {
+            }
+        }
+
 
         public void AddSnakeToTerrarium(string id, List<LandTerrarium> lanTerList, List<Snake> snakeList)
         {

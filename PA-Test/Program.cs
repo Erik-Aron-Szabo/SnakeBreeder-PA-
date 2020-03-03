@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PA_Test
 {
-    public  class Program
+    public class Program
     {
         
         public static void Main(string[] args)
@@ -51,7 +51,6 @@ namespace PA_Test
             waTerList = theXml.WaterTerLoadObjectFromXmlFile(waterFilename);
             lanTerList = theXml.LandTerLoadObjectFromXmlFile(terFilename);
 
-            
 
             theXml.WriteToXmlFile(snakeList, snakeFilename);
 
@@ -61,7 +60,12 @@ namespace PA_Test
                 mainMenu.DisplayMainMenu();
                 string choice = mainMenu.InputHandler("Type option with lowercase: ");
                 if (!mainMenu.Switch(choice, snakeList, lanTerList, waTerList, snakeFilename, terFilename, waterFilename))
-                    break;
+                {
+                    theXml.WaterTerWriteToXmlFile(waTerList, waterFilename);
+                    theXml.LandTerWriteToXmlFile(lanTerList, terFilename);
+                    theXml.WriteToXmlFile(snakeList, snakeFilename);
+                }
+                break;
 
             } while (true);
         }

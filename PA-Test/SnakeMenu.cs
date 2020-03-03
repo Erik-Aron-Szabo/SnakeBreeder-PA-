@@ -32,12 +32,14 @@ namespace PA_Test
             {
                 try
                 {
-                    if (choice == "create")
+                    if (choice == "create" || choice == "1")
                     {
                         AddSnakeToList(CreateSnake(snakeList), snakeList); //check, 2 snakes can NOT have the same name
                         Console.WriteLine("Done!");
+                        break;
+
                     }
-                    else if (choice == "destroy")
+                    else if (choice == "destroy" || choice == "2")
                     {
                         Console.WriteLine("Name: ");
                         string uiName = Console.ReadLine();
@@ -45,17 +47,22 @@ namespace PA_Test
                         string uiType = Console.ReadLine();
                         theXml.WriteToXmlFile(DeleteSnake(uiName, uiType, snakeList), filename);
                         Console.WriteLine("Done!");
+                        break;
+
                     }
-                    else if (choice == "update")
+                    else if (choice == "update" || choice == "3")
                     {
                         Console.WriteLine("Name of the snake you want to update: ");
                         string uiName = Console.ReadLine();
                         UpdateSnake(uiName, snakeList);
                         Console.WriteLine("Done!");
+                        break;
+
                     }
-                    else if (choice == "display")
+                    else if (choice == "display" || choice == "4")
                     {
                         DisplayAllSnakes(snakeList);
+                        break;
                     }
                     else if (choice == "exit")
                     {

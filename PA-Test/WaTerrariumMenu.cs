@@ -13,14 +13,13 @@ namespace PA_Test
             Console.WriteLine("Water Terrarium Menu");
             Console.WriteLine("(1) Create (Terrarium)");
             Console.WriteLine("(2) Destroy (Terrarium)");
-            Console.WriteLine("(3) Snakes Menu");
-            Console.WriteLine("(4) Update");
-            Console.WriteLine("(5) Display");
-            Console.WriteLine("() Exit");
+            Console.WriteLine("(4) Display");
+            Console.WriteLine("(6) back");
+            Console.WriteLine("(7) Exit");
         }
 
         
-        public List<WaterTerrarium> WaTerrariumSwitch(string choice, List<Snake> snakeList, string snakeFilename, List<WaterTerrarium> waTerList, string waterFilename, List<LandTerrarium> lanTerList, string lanTerfilename)
+        public List<WaterTerrarium> WaTerrariumSwitch(string choice, List<Snake> snakeList, string snakeFilename, List<WaterTerrarium> waTerList, string waterFilename)
         {
             SnakeMenu snakeMenu = new SnakeMenu();
             XML theXml = new XML();
@@ -29,33 +28,32 @@ namespace PA_Test
             {
                 try
                 {
-                    if (choice == "create")
+                    if (choice == "create" || choice == "1")
                     {
                         AddTerToList(CreateWaTerrarium(waTerList), waTerList);
+                        theXml.WaterTerWriteToXmlFile(waTerList, waterFilename);
+                        break;
+
                     }
-                    else if (choice == "destroy")
+                    else if (choice == "destroy" || choice == "2")
                     {
-                        Console.WriteLine("Name: ");
-                        string uiName = Console.ReadLine();
-                        Console.WriteLine("Type: ");
-                        string uiType = Console.ReadLine();
-                        //theXml.WriteToXmlFile(DeleteSnake(uiName, uiType, snakeList), filename);
-                        Console.WriteLine("Done!");
+                        Console.WriteLine("ID: ");
+                        string id = Console.ReadLine();
+                        DestroyTerrarium(waTerList, id);
+                        theXml.WaterTerWriteToXmlFile(waTerList, waterFilename);
+                        break;
                     }
 
-                    else if (choice == "display")
+                    else if (choice == "display" || choice == "4")
                     {
                         DisplayTerrarium(waTerList);
+                        break;
                     }
-                    else if (choice == "add")
-                    {
-                        // add snake into terrarium
-                    }
-                    else if (choice == "exit")
+                    else if (choice == "exit" )
                     {
                         System.Environment.Exit(1);
                     }
-                    else if (choice == "back")
+                    else if (choice == "back" || choice == "6")
                     {
                         break;
                         // go back to MainMenu
@@ -70,6 +68,23 @@ namespace PA_Test
            
 
             return waTerList;
+        }
+
+        public void DestroyTerrarium(List<WaterTerrarium> waTerList, string id)
+        {
+            try
+            {
+                foreach (var ter in waTerList)
+                {
+                    if (ter.ID == id)
+                    {
+                        waTerList.Remove(ter);
+                    }
+                }
+            }
+            catch (System.InvalidOperationException)
+            {
+            }
         }
 
         public void AddSnakeToTerrarium(string id, List<WaterTerrarium> waTerList, List<Snake> snakeList)
@@ -98,13 +113,14 @@ namespace PA_Test
             waTerList.Add(waTer);
         }
 
-        public void DisplayTerrarium(List<WaterTerrarium> waTerList)
+        public string DisplayTerrarium(List<WaterTerrarium> waTerList)
         {
             foreach (var ter in waTerList)
             {
                 Console.WriteLine(ter.ToString());
                 Console.WriteLine("----");
             }
+            return "Done!";
         }
 
         public WaterTerrarium CreateWaTerrarium(List<WaterTerrarium> waTerList)
