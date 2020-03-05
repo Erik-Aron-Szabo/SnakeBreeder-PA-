@@ -15,8 +15,7 @@ namespace PA_Test
             Console.WriteLine("(1) Water Terrarium Menu");
             Console.WriteLine("(2) Land Terrarium Menu");
             Console.WriteLine("(3) Snakes Menu");
-            Console.WriteLine("() Back");
-            Console.WriteLine("() Exit");
+            Console.WriteLine("(4) Exit");
         }
 
 
@@ -37,7 +36,6 @@ namespace PA_Test
         public bool Switch(string choice, List<Snake> snakeList, List<LandTerrarium> lanTerList, List<WaterTerrarium> waTerList, string snakeFilename, string terFilename, string waterFilename) //MISSING waTer
         {
             SnakeMenu snakeMenu = new SnakeMenu();
-            FoodMenu foodMenu = new FoodMenu();
             WaTerrariumMenu waTerrariumMenu = new WaTerrariumMenu();
             LaTerrariumMenu laTerrariumMenu = new LaTerrariumMenu();
             try
@@ -50,7 +48,7 @@ namespace PA_Test
                     theXml.WriteToXmlFile(snakeMenu.SnakeSwitch(ui, snakeList,  waTerList, lanTerList, snakeFilename), snakeFilename);
                     return true;
                 }
-                else if (choice == "2") //LAND
+                else if (choice == "land" || choice == "2") //LAND
                 {
                     laTerrariumMenu.LaTerrariumMenuDisplay();
                     string ui = Console.ReadLine();
@@ -58,7 +56,7 @@ namespace PA_Test
                     return true;
 
                 }
-                else if (choice == "1") //WATER
+                else if (choice == "water" || choice == "1") //WATER
                 {
                     waTerrariumMenu.WaTerrariumMenuDisplay();
                     string ui = Console.ReadLine();
@@ -67,16 +65,15 @@ namespace PA_Test
 
                 }
                 
-                else if (choice == "exit")
+                else if (choice == "exit" || choice == "4")
                 {
 
                     return false;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                Console.WriteLine("Invlaid input!(3)");
+                Console.WriteLine(ex.Message);
             }
             return true;
         }

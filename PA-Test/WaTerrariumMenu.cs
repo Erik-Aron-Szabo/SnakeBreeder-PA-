@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace PA_Test
@@ -13,9 +14,10 @@ namespace PA_Test
             Console.WriteLine("Water Terrarium Menu");
             Console.WriteLine("(1) Create (Terrarium)");
             Console.WriteLine("(2) Destroy (Terrarium)");
-            Console.WriteLine("(4) Display");
-            Console.WriteLine("(6) back");
-            Console.WriteLine("(7) Exit");
+            Console.WriteLine("(3) Display");
+            Console.WriteLine("(4) Add snake to terrarium");
+            Console.WriteLine("(5) back");
+            Console.WriteLine("(6) Exit");
         }
 
         
@@ -23,6 +25,8 @@ namespace PA_Test
         {
             SnakeMenu snakeMenu = new SnakeMenu();
             XML theXml = new XML();
+            List<WaterTerrarium> tempWaterList = waTerList;
+
             //maybe a WHILE here?
             while (true)
             {
@@ -32,37 +36,54 @@ namespace PA_Test
                     {
                         AddTerToList(CreateWaTerrarium(waTerList), waTerList);
                         theXml.WaterTerWriteToXmlFile(waTerList, waterFilename);
+                        Console.WriteLine("Water terrarium successfully created.");
                         break;
 
                     }
                     else if (choice == "destroy" || choice == "2")
                     {
-                        Console.WriteLine("ID: ");
-                        string id = Console.ReadLine();
-                        DestroyTerrarium(waTerList, id);
+                        while (true)
+                        {
+                            Console.WriteLine("ID: ");
+                            string id = Console.ReadLine();
+                            string msg = $"Terrarium with: {id} has been deleted.";
+                            if (DestroyTerrarium(waTerList, id) == msg)
+                            {
+                                Console.WriteLine(msg);
+                                break;
+                            }
+                            Console.WriteLine("Invalid id!");
+                        }
                         theXml.WaterTerWriteToXmlFile(waTerList, waterFilename);
                         break;
+
                     }
 
-                    else if (choice == "display" || choice == "4")
+                    else if (choice == "display" || choice == "3")
                     {
                         DisplayTerrarium(waTerList);
                         break;
                     }
-                    else if (choice == "exit" )
+                    else if (choice == "add" || choice == "4")
+                    {
+                        AddSnakeToTer(snakeList, waTerList, snakeMenu);
+                        Console.WriteLine("Done");
+                        theXml.WaterTerWriteToXmlFile(waTerList, waterFilename);
+                        theXml.WriteToXmlFile(snakeList, snakeFilename);
+                        break;
+                    }
+                    else if (choice == "back" || choice == "5")
+                    {
+                        break;
+                    }
+                    else if (choice == "exit" || choice == "6")
                     {
                         System.Environment.Exit(1);
                     }
-                    else if (choice == "back" || choice == "6")
-                    {
-                        break;
-                        // go back to MainMenu
-                    }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
-                    Console.WriteLine("Invalid input!");
+                    Console.WriteLine(ex.Message);
                 }
             }
            
@@ -70,21 +91,93 @@ namespace PA_Test
             return waTerList;
         }
 
-        public void DestroyTerrarium(List<WaterTerrarium> waTerList, string id)
+        bool TypeChecker(string snakeName, List<Snake> snakeList)
         {
-            try
+            string type = "water";
+            // True if good to go, else false
+            foreach (var snake in snakeList)
             {
-                foreach (var ter in waTerList)
+                if (type.ToLower() == snake.Type.ToLower() && snake.Name == snakeName)
                 {
-                    if (ter.ID == id)
-                    {
-                        waTerList.Remove(ter);
-                    }
+                    return true;
                 }
             }
-            catch (System.InvalidOperationException)
+            return false;
+        }
+
+        public void AddSnakeToTer(List<Snake> snakeList, List<WaterTerrarium> waTerList, SnakeMenu snakeMenu)
+        {
+            Console.WriteLine("Please choose the terrarium you would like to add the snake to:");
+            DisplayTerrarium(waTerList);
+            Console.WriteLine("ID: ");
+            string terId = Console.ReadLine();
+
+            Console.WriteLine("Please choose the snake you would like to add:");
+            snakeMenu.DisplayAllSnakes(snakeList);
+            while (true)
             {
+                Console.WriteLine("Name: ");
+                string snakeName = Console.ReadLine();
+                foreach (var ter in waTerList)
+                {
+                    if (ter.ID == terId)
+                    {
+                        foreach (var snake in snakeList)
+                        {
+                            if (snake.Name == snakeName)
+                            {
+                                try
+                                {
+                                    ter.AddSnake(snake);
+                                }
+                                catch (Exception ex)
+                                {
+
+                                    throw ex;
+                                }
+
+                                snakeList.Remove(snake);
+                                Console.WriteLine($"Snake: {snake.Name} has been removed from the SnakeList.");
+                                Console.WriteLine($"Snake: {snake.Name} has been added to the terrarium with ID: {ter.ID}.");
+                                break;
+                            }
+                        }
+                        break;
+                    }
+
+                }
             }
+        }
+
+        public string DestroyTerrarium(List<WaterTerrarium> waTerList, string id)
+        {
+
+            string message = "";
+            foreach (var ter in waTerList)
+            {
+                if (ter.ID == id)
+                {
+                    waTerList.Remove(ter);
+                    message = $"Terrarium with: {id} has been deleted.";
+                    break;
+                }
+            }
+            if (message == $"Terrarium with: {id} has been deleted.")
+            {
+                return message;
+            }
+            else
+            {
+                message = "Invalid ID";
+                return message;
+            }
+
+        }
+
+        public bool DidItDelete(List<WaterTerrarium> waTerList, List<WaterTerrarium> tempWaTerList)
+        {
+            bool equal = waTerList.SequenceEqual(tempWaTerList);
+            return equal;
         }
 
         public void AddSnakeToTerrarium(string id, List<WaterTerrarium> waTerList, List<Snake> snakeList)
@@ -115,10 +208,11 @@ namespace PA_Test
 
         public string DisplayTerrarium(List<WaterTerrarium> waTerList)
         {
+            Console.WriteLine("Existing Terrariums:");
             foreach (var ter in waTerList)
             {
                 Console.WriteLine(ter.ToString());
-                Console.WriteLine("----");
+                Console.WriteLine("-------------------------------");
             }
             return "Done!";
         }

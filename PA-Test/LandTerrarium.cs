@@ -7,26 +7,15 @@ namespace PA_Test
     [Serializable]
     public class LandTerrarium : Terrarium
     {
-
-        //public override string Type
-        //{
-        //    get
-        //    {
-        //        return this.Type;
-        //    }
-
-        //    protected set
-        //    {
-        //        Type = "Land";
-        //    }
-        //}
-
-
-        public override void AddSnake(Snake snake) //Override MISSING
+        public override void AddSnake(Snake snake)
         {
             if (snake.Type.ToLower() == "land")
             {
                 SnakeList.Add(snake);
+            }
+            else
+            {
+                throw new Exception("Unable to add snake to land terrarium!");
             }
         }
 

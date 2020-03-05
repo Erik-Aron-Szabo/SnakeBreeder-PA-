@@ -7,7 +7,6 @@ namespace PA_Test
 {
     public class Program
     {
-        
         public static void Main(string[] args)
         {
 
@@ -59,14 +58,16 @@ namespace PA_Test
             {
                 mainMenu.DisplayMainMenu();
                 string choice = mainMenu.InputHandler("Type option with lowercase: ");
-                if (!mainMenu.Switch(choice, snakeList, lanTerList, waTerList, snakeFilename, terFilename, waterFilename))
+                if (mainMenu.Switch(choice, snakeList, lanTerList, waTerList, snakeFilename, terFilename, waterFilename))
                 {
                     theXml.WaterTerWriteToXmlFile(waTerList, waterFilename);
                     theXml.LandTerWriteToXmlFile(lanTerList, terFilename);
                     theXml.WriteToXmlFile(snakeList, snakeFilename);
                 }
-                break;
-
+                else
+                {
+                    break;
+                }
             } while (true);
         }
     }

@@ -1,10 +1,6 @@
 <?xml version="1.0"?>
 <ArrayOfSnake xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Snake Name="Erik" Type="Water" />
-  <Snake Name="Pal" Type="Water" />
-  <Snake Name="Erik" Type="Water" />
-  <Snake Name="Robi" Type="Land" />
-  <Snake Name="Pipo" Type="Water" />
-  <Snake Name="Hugo" Type="Land" />
-  <Snake Name="Ketto" Type="Water" />
+  <Snake Name="Foldi" Type="Land" />
+  <Snake Name="Ded" Type="Land" />
+  <Snake Name="Pali" Type="Land" />
 </ArrayOfSnake>

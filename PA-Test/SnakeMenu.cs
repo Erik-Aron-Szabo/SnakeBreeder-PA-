@@ -22,8 +22,8 @@ namespace PA_Test
             Console.WriteLine("(2) Destroy (takes snake out of the List)");
             Console.WriteLine("(3) Update (update snake)");
             Console.WriteLine("(4) Display (all snakes)");
-            Console.WriteLine("(7) Back");
-            Console.WriteLine("(8) Exit");
+            Console.WriteLine("(5) Back");
+            Console.WriteLine("(6) Exit");
         }
 
         public List<Snake> SnakeSwitch(string choice, List<Snake> snakeList, List<WaterTerrarium> waTerList, List<LandTerrarium> lanTerList, string filename)
@@ -41,14 +41,21 @@ namespace PA_Test
                     }
                     else if (choice == "destroy" || choice == "2")
                     {
-                        Console.WriteLine("Name: ");
-                        string uiName = Console.ReadLine();
-                        Console.WriteLine("Type: ");
-                        string uiType = Console.ReadLine();
-                        theXml.WriteToXmlFile(DeleteSnake(uiName, uiType, snakeList), filename);
-                        Console.WriteLine("Done!");
+                        while (true)
+                        {
+                            Console.WriteLine("Name: ");
+                            string name = Console.ReadLine();
+                            Console.WriteLine("Type: ");
+                            string type = Console.ReadLine();
+                            string msg = $"Snake with name: {name} and type: {type} is deleted.";
+                            if (msg == DeleteSnake(name, type, snakeList))
+                            {
+                                Console.WriteLine(msg);
+                                break;
+                            }
+                            Console.WriteLine("Invalid name or type or both!");
+                        }
                         break;
-
                     }
                     else if (choice == "update" || choice == "3")
                     {
@@ -64,24 +71,20 @@ namespace PA_Test
                         DisplayAllSnakes(snakeList);
                         break;
                     }
-                    else if (choice == "exit")
+                    else if (choice == "exit" || choice == "5")
                     {
                         System.Environment.Exit(1);
                     }
-                    else if (choice == "back")
+                    else if (choice == "back" || choice == "6")
                     {
                         break;
-                        // go back to MainMenu
                     }
                 }
                 catch (Exception)
                 {
-
                     Console.WriteLine("Type with lowercase maybe.");
                 }
             }
-            //maybe a WHILE here?
-           
 
             return snakeList;
         }
@@ -107,55 +110,84 @@ namespace PA_Test
 
         public Snake CreateSnake(List<Snake> snakeList) //XML writes it also
         {
-
+            string uiType;
+            string name;
             Snake Hul = new Snake(); //HashSet instead of list?
-            Console.WriteLine("Name: ");
-            string uiName = Console.ReadLine();
-            AlreadyExistChecker(snakeList, uiName); //Snake name can not be the same
-            Console.WriteLine("Type: ");
-            string uiType = Console.ReadLine();
-            Hul.Name = uiName;
+            while (true)
+            {
+                Console.WriteLine("Name: ");
+                string uiName = Console.ReadLine();
+                if (!DoesExist(snakeList, uiName))
+                {
+                    name = uiName;
+                    break;
+                }
+            }
+            
+            uiType = TypeChecker();
+            Hul.Name = name;
             Hul.Type = uiType;
             return Hul;
         }
 
-        public bool AlreadyExistChecker(List<Snake> snakeList, string name)
+        public string TypeChecker()
         {
-            foreach (var snake in snakeList)
+            string type = "";
+            while (true)
             {
-                if (snake.Name.ToLower() == name.ToLower())
+                Console.WriteLine("Type: (Water or Land)");
+                string uiType = Console.ReadLine();
+                if (!(uiType.ToLower() == "water" || uiType.ToLower() == "land"))
                 {
-                    Console.WriteLine("Snake already exists with given name!\nTry again!");
-                    return true;
+                    Console.WriteLine("Please type 'Water' or 'Land' as a type!");
+                }
+                else
+                {
+                    type = uiType;
+                    break;
                 }
             }
-            return false;
+            return type;
         }
-        public List<Snake> DeleteSnake(string name, string type, List<Snake> snakeList)
+
+        public bool DoesExist(List<Snake> snakeList, string name)
         {
-            // if snake's name are the same, it will delete both snakes.
-            try
+            while (true)
             {
-                int counter = 0;
-                foreach (var snake in snakeList.ToList())
+                foreach (var snake in snakeList)
                 {
-                    if (name == snake.Name && type == snake.Type)
+                    if (snake.Name.ToLower() == name.ToLower())
                     {
-                        if (counter >= 1)
-                        {
-                            Console.WriteLine("There are more than 1 snakes with the same name and type!\nBoth will be deleted!"); //maybe the User can decide if he wants to delete all snakes?
-                        }
-                        snakeList.Remove(snake);
-                        counter++;
+                        Console.WriteLine("Snake already exists with given name!\nTry again!");
+                        return true;
                     }
+
+                }
+                return false;
+            }
+        }
+        public string DeleteSnake(string name, string type, List<Snake> snakeList)
+        {
+            string msg = "";
+            foreach (var snake in snakeList.ToList())
+            {
+                if (name == snake.Name && type == snake.Type)
+                {
+                    msg = $"Snake with name: {name} and type: {type} is deleted.";
+                    snakeList.Remove(snake);
+                    break;
                 }
             }
-            catch (Exception ok)
+            if (msg == $"Snake with name: {name} and type: {type} is deleted.")
             {
-                Console.WriteLine(ok);
-                Console.WriteLine("Check given name!");
+                return msg;
             }
-            return snakeList;
+            else
+            {
+                msg = "Invalid name or type or both!";
+                return msg;
+            }
+
         }
 
         public void UpdateSnake(string name, List<Snake> snakeList)
@@ -187,8 +219,7 @@ namespace PA_Test
         {
             foreach (Snake item in snakeList)
             {
-                Console.WriteLine(item);
-                Console.WriteLine($"Name: {item.Name}");
+                Console.WriteLine($"Snake's Name: {item.Name} - Snake's Type: {item.Type}");
             }
         }
     }

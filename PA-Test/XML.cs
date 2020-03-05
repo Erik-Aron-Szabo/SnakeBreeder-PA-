@@ -46,7 +46,7 @@ namespace PA_Test
             }
             return snakes;
         }
-        public void WaterTerWriteToXmlFile(List<WaterTerrarium> waTer, string filename)
+        public void WaterTerWriteToXmlFile(List<WaterTerrarium> waTer, string filename) //serialize Abstracts instead of individual
         {
             //water terrarium
             System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof(List<WaterTerrarium>));
